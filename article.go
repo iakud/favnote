@@ -62,31 +62,27 @@ func (article *Article) parse(text []byte) {
 		if summaryRegexp.Match(comment) {
 			article.Summary = template.HTML(blackfriday.MarkdownBasic(content.Bytes()))
 		} else {
-			article.parseComment(comment)
+			scanner := bufio.NewScanner(bytes.NewReader(comment))
+			scanner.Split(bufio.ScanLines)
+			for scanner.Scan() {
+				if slice := commentRegexp.FindStringSubmatch(scanner.Text()); slice != nil {
+					switch slice[1] {
+					case "author":
+						article.Author = slice[2]
+					case "date":
+						if date, err := time.Parse("2006-01-02 15:04:05", slice[2]); err != nil {
+							log.Println(err.Error())
+						} else {
+							article.Date = date
+						}
+					case "title":
+						article.Title = slice[2]
+					default:
+					}
+				}
+			}
 		}
 		text = text[leftPos+len(leftComment)+rightPos+len(rightComment):]
 	}
 	article.Content = template.HTML(blackfriday.MarkdownBasic(content.Bytes()))
-}
-
-func (article *Article) parseComment(comment []byte) {
-	scanner := bufio.NewScanner(bytes.NewReader(comment))
-	scanner.Split(bufio.ScanLines)
-	for scanner.Scan() {
-		if slice := commentRegexp.FindStringSubmatch(scanner.Text()); slice != nil {
-			switch slice[1] {
-			case "author":
-				article.Author = slice[2]
-			case "date":
-				var err error
-				article.Date, err = time.Parse("2006-01-02 15:04:05", slice[2])
-				if err != nil {
-					log.Println(err.Error())
-				}
-			case "title":
-				article.Title = slice[2]
-			default:
-			}
-		}
-	}
 }
