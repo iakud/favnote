@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/iakud/favor/web"
+	"github.com/iakud/coral"
 )
 
 func main() {
@@ -9,11 +9,11 @@ func main() {
 	// parse template
 	loadTemplate()
 	// init router
-	web.Get("/favicon.ico", faviconIcoHandler)
-	web.Get("/static/(.*)", staticHandler)
-	web.Get("/img/(.*)", imageHandler)
-	web.Get("/article/(.*)", articleHandler)
-	web.Get("/", homeHandler)
+	coral.Get("/favicon.ico", faviconIcoHandler)
+	coral.Get("/static/(.*)", staticHandler)
+	coral.Get("/img/(.*)", imageHandler)
+	coral.Get("/article/(.*)", articleHandler)
+	coral.Get("/", homeHandler)
 	// run
-	web.Run("localhost:80")
+	coral.Run("localhost:80")
 }

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/iakud/favor/web"
+	"github.com/iakud/coral"
 	"html/template"
 )
 
@@ -13,7 +13,7 @@ func loadTemplate() {
 	tmplates["article"] = template.Must(template.ParseFiles("html/article.html", "html/layout.html"))
 }
 
-func renderTemplate(ctx *web.Context, name string, data interface{}) error {
+func renderTemplate(ctx *coral.Context, name string, data interface{}) error {
 	if t, ok := tmplates[name]; ok {
 		ctx.SetHeader("Content-Type", "text/html; charset=utf-8")
 		return t.Execute(ctx.ResponseWriter, data)
