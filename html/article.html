@@ -1,0 +1,8 @@
+{{template "layout.html" .}}
+{{define "content"}}
+<div class="blog-post">
+	<h2 class="blog-post-title">{{.Title}}</h2>
+	<p class="blog-post-meta">{{.Date}} by {{.Author}}</p>
+	{{.Content}}
+</div>
+{{end}}

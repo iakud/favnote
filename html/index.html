@@ -1,0 +1,12 @@
+{{template "layout.html" .}}
+{{define "content"}}
+{{range .}}
+<div class="blog-post">
+	<h2 class="blog-post-title">{{.Title}}</h2>
+	<p class="blog-post-meta">{{.Date}} by {{.Author}}</p>
+	{{.Summary}}
+	<hr>
+	<a href="/article/{{.Name}}">More</a>
+</div>
+{{end}}
+{{end}}
