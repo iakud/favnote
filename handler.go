@@ -19,14 +19,14 @@ func imageHandler(ctx *coral.Context, filePath string) {
 	ctx.ServeFile(imageFilePath)
 }
 
-func articleHandler(ctx *coral.Context, name string) {
-	if b, ok := articles[name]; ok {
-		renderTemplate(ctx, "article", b)
+func blogHandler(ctx *coral.Context, name string) {
+	if b, ok := allBlogs[name]; ok {
+		renderTemplate(ctx, "blog", b)
 	} else {
 		ctx.NotFound(name)
 	}
 }
 
 func homeHandler(ctx *coral.Context) {
-	renderTemplate(ctx, "home", sortedArticles)
+	renderTemplate(ctx, "home", listBlogs)
 }
