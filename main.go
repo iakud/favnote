@@ -11,7 +11,7 @@ func main() {
 	// init router
 	coral.Get("/favicon.ico", faviconIcoHandler)
 	coral.Get("/static/(.*)", staticHandler)
-	coral.Get("/img/(.*)", imageHandler)
+	coral.Get("/image/(.*)", imageHandler)
 	coral.Get("/blog/(.*)", blogHandler)
 	coral.Get("/", homeHandler)
 	// run

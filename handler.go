@@ -15,7 +15,7 @@ func staticHandler(ctx *coral.Context, filePath string) {
 }
 
 func imageHandler(ctx *coral.Context, filePath string) {
-	imageFilePath := filepath.Join("static", filePath)
+	imageFilePath := filepath.Join("blog/image", filePath)
 	ctx.ServeFile(imageFilePath)
 }
 
